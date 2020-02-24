@@ -1,35 +1,35 @@
 <template>
   <div id="app">
     <h4 class="bg-primary text-white text-center p-2">
-      {{name}}'s To Do List
+      {{name}}'s Ingredients
     </h4>
+    <h3 class="text-black text-center">Storage</h3>
     <div class="container-fluid p-4">
       <div class="row">
-        <div class="col font-weight-bold">Task</div>
-        <div class="col-2 font-weight-bold">Done</div>
+        <div class="col font-weight-bold">Ingredient</div>
+        <div class="col-2 font-weight-bold">Quantity</div>
       </div>
-      <div class="row" v-for="t in filteredTasks" v-bind:key="t.action">
-        <div class="col">{{t.action}}</div>
-        <div class="col-2 text-center">
-          <input type="checkbox" v-model="t.done" class="form-check-input"/>
-        </div>
+      <div class="row" v-for="t in ingredients" v-bind:key="t.ingred">
+          <div class ="col">{{t.ingred}}</div>
+          <div class ="col-2">{{t.quant}}</div>
       </div>
+      <br><br>
+     <h3 class="text-black text-center">Add Ingredient</h3>
       <div class="row py-2">
         <div class="col">
-          <input v-model="newItemText" class="form-control"/>
-        </div>
-        <div class="col-2">
-          <button class="btn btn-primary" v-on:click="addNewTodo">Add</button>
-        </div>
-      </div>
-      <div class="row bg-secondary py-2 mt-2 text-white" >
-          <div class=" col text-center">
-              <input type="checkbox" v-model="hideCompleted" class="form-check-input"/>
-              <label class="form-check-label font-weight-bold">
-                Hide completed tasks
-              </label>
+          <div>
+            <label class="text-black text-bold">Name: </label>
+            <input v-model="newIngredientText" class="form-control"/>
           </div>
+          <div>
+            <label class="text-black text-bold">Quantity: </label>
+            <input v-model="newIngredientquant" class="form-control"/>
+            </div>  
+        </div>
       </div>
+       <div class="col-2">
+          <button class="btn btn-primary" v-on:click="addNewIngredient">Add</button>
+        </div>
     </div>
   </div>
 </template>
@@ -41,29 +41,27 @@ export default {
   data(){
     return{
       name: "Martin",
-      tasks: [{ action: "Buy flowers", done: false},
-      {action: "Practice German", done: true},
-      {action: "Practice Vue", done: false},
-      {action: "Work out", done: false}],
-      hideCompleted: true,
-      newItemText: ""
-    }
-  },
-  computed:{
-    filteredTasks(){
-      return this.hideCompleted ?
-      this.tasks.filter(t=> !t.done) : this.tasks
+      ingredients: [
+        {ingred: "Onion",quant: 3},
+        {ingred: "Tomato",quant:5}
+        ],
+      newIngredientText: "",
+      newIngredientquant: 0
     }
   },
   methods: {
-    addNewTodo(){
-      this.tasks.push({
-        action: this.newItemText,
-        done: false
+    addNewIngredient(){
+      this.ingredients.push({
+        ingred: this.newIngredientText,
+        quant: this.newIngredientquant
       });
-      this.newItemText ="";
+      this.newIngredientText ="";
+      this.newIngredientquant=0;
     }
   }
 }
 </script>
+
+
+
 
